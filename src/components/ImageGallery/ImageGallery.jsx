@@ -1,16 +1,37 @@
 import React from "react";
 import ImageGalleryItem from "./ImageGalleryItem";
+import Modal from "./Modal";
+import Loader from "./Loader";
 import Buton from "./Button";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
-const ImageGallery = ({ gallery, onFetchGallery }) => {
+const ImageGallery = ({
+  gallery,
+  onFetchGallery,
+  isLoader,
+  showModals,
+  toggleModal,
+}) => {
   return (
-    <div>
+    <div className="ImageBlock">
       <ul className="ImageGallery">
         {gallery.map(({ id, webformatURL, tags }) => (
-          <ImageGalleryItem id={id} webformatURL={webformatURL} tag={tags} />
+          <ImageGalleryItem
+            id={id}
+            webformatURL={webformatURL}
+            tag={tags}
+            toggleModal={toggleModal}
+          />
         ))}
-        <Buton onFetchGallery={onFetchGallery} />
       </ul>
+      {isLoader && <Loader />}
+      {gallery.length > 0 && (
+        <Buton onFetchGallery={onFetchGallery} gallery={gallery} />
+      )}
+      {showModals &&
+        gallery.map(({ largeImageURL, tags }) => (
+          <Modal largeImageURL={largeImageURL} tags={tags} />
+        ))}
     </div>
   );
 };
