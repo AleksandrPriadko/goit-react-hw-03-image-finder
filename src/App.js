@@ -10,14 +10,11 @@ class App extends Component {
     gallery: [],
     searchQuery: "",
     page: 1,
+    largeImg: "",
+    alt: "",
     isLoader: false,
     showModals: false,
-  };
-
-  toggleModal = () => {
-    this.setState(({ showModals }) => ({
-      showModals: !showModals,
-    }));
+    error: null,
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -31,6 +28,7 @@ class App extends Component {
       searchQuery: query,
       page: 1,
       gallery: [],
+      error: null,
     });
     console.log(query);
   };
@@ -51,12 +49,26 @@ class App extends Component {
           behavior: "smooth",
         });
       })
-      .catch((error) => console.log(error))
+      .catch((error) => this.setState({ error }))
       .finally(() => this.setState({ isLoader: false }));
   };
 
+  toggleModal = () => {
+    this.setState(({ showModals }) => ({
+      showModals: !showModals,
+    }));
+  };
+
+  toggleModalImg = (gallery) => {
+    console.log(gallery.largeImageURL);
+    this.setState({
+      largeImg: gallery.largeImageURL,
+      alt: gallery.tags,
+    });
+    this.toggleModal();
+  };
   render() {
-    const { gallery, isLoader, showModals } = this.state;
+    const { gallery, isLoader, showModals, largeImg, alt } = this.state;
 
     return (
       <>
@@ -67,6 +79,9 @@ class App extends Component {
           isLoader={isLoader}
           showModals={showModals}
           toggleModal={this.toggleModal}
+          toggleModalImg={this.toggleModalImg}
+          srcImg={largeImg}
+          tag={alt}
         />
       </>
     );

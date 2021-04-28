@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 const Buton = ({ onFetchGallery }) => {
   return (
@@ -8,4 +9,7 @@ const Buton = ({ onFetchGallery }) => {
   );
 };
 
+Buton.propTypes = {
+  onFetchGallery: PropTypes.func.isRequired,
+};
 export default Buton;

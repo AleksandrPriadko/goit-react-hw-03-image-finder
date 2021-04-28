@@ -3,8 +3,8 @@ import Loader from "react-loader-spinner";
 
 const Loaders = () => {
   return (
-    <div className="loader">
-      <Loader type="ThreeDots" color="#00BFFF" height={80} width={80} />
+    <div className="loader spinner">
+      <Loader type="ThreeDots" color="#303f9f" height={80} width={80} />
     </div>
   );
 };
