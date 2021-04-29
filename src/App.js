@@ -36,10 +36,6 @@ class App extends Component {
           gallery: [...prevState.gallery, ...hits],
           page: prevState.page + 1,
         }));
-        window.scrollTo({
-          top: document.documentElement.scrollHeight,
-          behavior: "smooth",
-        });
       })
       .catch((error) => this.setState({ error }))
       .finally(() => this.setState({ isLoader: false }));
