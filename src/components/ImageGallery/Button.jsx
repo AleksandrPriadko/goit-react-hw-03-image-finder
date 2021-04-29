@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 
 class Buton extends Component {
   componentDidUpdate(prevProps, prevState) {
-    console.log("Обнавление");
     window.scrollTo({
       top: document.documentElement.scrollHeight,
       behavior: "smooth",
