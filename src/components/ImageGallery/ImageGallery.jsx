@@ -37,7 +37,9 @@ class ImageGallery extends Component {
           />
         </ul>
         {isLoader && <Loader />}
-        {gallery.length > 0 && <Buton onFetchGallery={onFetchGallery} />}
+        {gallery.length > 0 && !isLoader && (
+          <Buton onFetchGallery={onFetchGallery} />
+        )}
         {showModals && (
           <Modal srcImgs={largeImg} tags={alt} onClose={this.toggleModal} />
         )}
