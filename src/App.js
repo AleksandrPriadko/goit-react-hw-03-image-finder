@@ -16,6 +16,12 @@ class App extends Component {
     if (prevState.searchQuery !== this.state.searchQuery) {
       this.fetchGallery();
     }
+    if (!this.state.isLoading) {
+      window.scrollTo({
+        top: document.documentElement.scrollHeight,
+        behavior: "smooth",
+      });
+    }
   }
 
   FormSubmitHandler = (query) => {
@@ -30,6 +36,7 @@ class App extends Component {
   fetchGallery = () => {
     const { searchQuery, page } = this.state;
     this.setState({ isLoader: true });
+
     ApiGallery(searchQuery.name, page)
       .then((hits) => {
         this.setState((prevState) => ({
@@ -39,6 +46,13 @@ class App extends Component {
       })
       .catch((error) => this.setState({ error }))
       .finally(() => this.setState({ isLoader: false }));
+  };
+  onClickLoad = () => {
+    window.scrollTo({
+      top: document.documentElement.scrollHeight,
+      behavior: "smooth",
+    });
+    this.fetchGallery();
   };
 
   render() {
